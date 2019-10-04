@@ -19,35 +19,81 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles').then(response => {
-    const tabsInfo = response.data.topics;
+    const bootstrapItem = response.articles.bootstrap;
+    const javascript = response.articles.javascript;
+    const jquery = response.articles.jquery;
+    const node = response.articles.node;
+    const technology = response.articles.technology;
+    
+    console.log(bootstrapItem);
+    
+    // bootstrap.forEach(element => {
+    //     articleFeed.appendChild(createFeed(element.headline, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+    //   })
+    
+    // javascript.forEach(element => {
+    //     articleFeed.appendChild(createFeed(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+    //     })
 
-    tabsInfo.forEach(topic => {
-        // console.log(Tabs(topic));
-        tabsContainer.appendChild(Tabs(topic));
-    })
+    // jquery.forEach(element => {
+    //     articleFeed.appendChild(createFeed(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+    //     })
+
+    // node.forEach(element => {
+    //     articleFeed.appendChild(createFeed(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+    //     })
+
+    // technology.forEach(element => {
+    //     articleFeed.appendChild(createFeed(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph))
+    //     })
   });
 
 
   const cardContainer = document.querySelector('.tabs');
-function Tabs(topics) {
+// our re-usable component function
+function createFeed(title, date, firstParagraph, secondParagraph, thirdParagraph, )  {
     // define new elements
-    const
-        topicsDiv = document.createElement('div'),
-        topicTitle = document.createElement('span')
-
+    const article = document.createElement("div");
+    const artcTitle = document.createElement("h2");
+    const artcDate = document.createElement("p");
+    const p1 = document.createElement("p");
+    const p2 = document.createElement("p");
+    const p3 = document.createElement("p");
+    const expandBtn = document.createElement("span");
+    
     // append
-    topicsDiv.appendChild(topicTitle);
-
-
+    
+    article.appendChild(artcTitle);
+    article.appendChild(artcDate);
+    article.appendChild(p1);
+    article.appendChild(p2);
+    article.appendChild(p3);
+    article.appendChild(expandBtn);
+  
+    
     // set class
-    topicsDiv.classList.add('tabs');
-    topicTitle.classList.add('tab');
+    
+    article.classList.add("article");
+    artcTitle.classList.add("title");
+    artcDate.classList.add("date");
+    p1.classList.add("p1");
+    p2.classList.add("p2");
+    p3.classList.add("p3");
+    expandBtn.classList.add("expandButton");
+    
+    
+  //   add content
+    artcTitle.textContent = title;
+    artcDate.textContent = date;
+    p1.textContent = firstParagraph;
+    p2.textContent = secondParagraph;
+    p3.textContent = thirdParagraph;
+    expandBtn.textContent  = 'Expand';
 
-    //   add content
-    topicTitle.textContent = topics;
-
-    // check for extra features
-
-    // return
-    return topicsDiv;
-}
+  // set up expand button
+    expandBtn.addEventListener("click", () => {
+        console.log('buttonClicked');
+        article.classList.toggle('article-open');
+      })
+    return article;
+  }

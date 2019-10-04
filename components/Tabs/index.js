@@ -10,42 +10,25 @@
 
 
 axios.get('https://lambda-times-backend.herokuapp.com/topics').then(response => {
-    const tabsInfo = response.data.topics;
-
-    tabsInfo.forEach(topic => {
-        // console.log(Tabs(topic));
-        tabsContainer.appendChild(Tabs(topic));
-    })
+    const topicsArray = response.data.topics;
+    topicsArray.forEach(topic => {
+        const singleTopic = topic;
+        tabsContainer.appendChild(Tabs(singleTopic));
+    });
   });
 
-/* <div class="tabs">
-<div class="topics">
-    <span class="title">TRENDING TOPICS:</span>
-</div>
-</div> */
 
-const tabsContainer = document.querySelector('.tabs');
-function Tabs(topics) {
-    // define new elements
-    const
-        topicsDiv = document.createElement('div'),
-        topicTitle = document.createElement('span')
+const tabsContainer = document.querySelector('.topics');
 
-    // append
-    topicsDiv.appendChild(topicTitle);
+function Tabs(topic) {
+    
+    const topicDiv = document.createElement('div');
 
+    topicDiv.classList.add('tab');
 
-    // set class
-    topicsDiv.classList.add('tabs');
-    topicTitle.classList.add('tab');
+    topicDiv.textContent = topic;
 
-    //   add content
-    topicTitle.textContent = topics;
-
-    // check for extra features
-
-    // return
-    return topicsDiv;
+    return topicDiv;
 }
 
   
