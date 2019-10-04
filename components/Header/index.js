@@ -8,5 +8,33 @@
 //    <span class="temp">98°</span>
 //  </div >
 // And add it to the DOM in the .header-container component
+const container = document.querySelector('.header-container');
+container.appendChild(Header());
+function Header() {
+    // define new elements
+    const
+        headerDiv = document.createElement('div'),
+        dateSpan = document.createElement('span'),
+        title = document.createElement('h1'),
+        tempSpan = document.createElement('span')
 
-function Header() {}
+    // append
+    headerDiv.appendChild(dateSpan);
+    headerDiv.appendChild(title);
+    headerDiv.appendChild(tempSpan);
+
+    // set class
+    headerDiv.classList.add('header');
+    dateSpan.classList.add('date');
+    tempSpan.classList.add('temp');
+
+    //   add content
+    title.textContent = 'Lambda Times';
+    dateSpan.textContent = 'MARCH 28, 2019';
+    tempSpan.textContent = '98°';
+
+    // check for extra features
+
+    // return
+    return headerDiv;
+}
